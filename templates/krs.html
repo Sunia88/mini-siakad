@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Pengisian KRS</title>
+</head>
+<body>
+  <h1>Pengisian KRS</h1>
+  <p>{{ mhs.nama }} ({{ nim }}) - Batas SKS:
+     <strong data-testid="batas-sks">{{ batas }}</strong>
+  </p>
+  <form method="post">
+    <input type="hidden" name="nim" value="{{ nim }}">
+    {% for kode, mk in matkul.items() %}
+    <label>
+      <input type="checkbox" name="matkul"
+             value="{{ kode }}"
+             data-testid="matkul-{{ kode }}"
+             {% if kode in pilihan %}checked{% endif %}>
+      {{ kode }} {{ mk[0] }} ({{ mk[1] }} SKS)
+    </label><br>
+    {% endfor %}
+    <button type="submit">Simpan KRS</button>
+  </form>
+  {% if pesan %}
+  <p data-testid="pesan">{{ pesan }}</p>
+  {% endif %}
+</body>
+</html>
